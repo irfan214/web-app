@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="voiceControlApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice-Controlled Web App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body ng-controller="MainController">
+  
+  <header class="app-header">
+    <div class="logo">Voice Assistant</div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/dashboard">Dashboard</a></li>
+        <li><a href="#/settings">Settings</a></li>
+        <li><a href="#/help">Help</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main class="app-content">
+    <!-- Voice control status -->
+    <div class="voice-status" ng-class="uiFeedback.status">
+      <div class="status-message">{{ uiFeedback.message }}</div>
+      <div class="transcription">
+        <span class="final">{{ voiceRecognition.transcript }}</span>
+        <span class="interim">{{ voiceRecognition.interimTranscript }}</span>
+      </div>
+    </div>
+    
+    <!-- Microphone button -->
+    <button class="mic-button" ng-click="toggleVoiceRecognition()" ng-class="{'active': voiceRecognition.isListening}">
+      <i class="fas" ng-class="voiceRecognition.isListening ? 'fa-microphone-alt' : 'fa-microphone'"></i>
+    </button>
+    
+    <!-- Command help -->
+    <div class="command-help">
+      <h3>Available Voice Commands:</h3>
+      <ul>
+        <li>"Go to [home/dashboard/settings/profile/help]"</li>
+        <li>"Search for [term]"</li>
+        <li>"Create [item/note/task/reminder] [details]"</li>
+        <li>"Delete [item/note/task/reminder] [details]"</li>
+        <li>"Log out"</li>
+      </ul>
+    </div>
+    
+    <!-- Main app views -->
+    <div ng-view></div>
+  </main>
+  
+  <footer class="app-footer">
+    <p>Voice-Controlled Web App &copy; 2025</p>
+  </footer>
+  
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-route.min.js"></script>
+  <script src="app.js"></script>
+  <script src="voice.service.js"></script>
+  <script src="command-handler.service.js"></script>
+  <script src="main.controller.js"></script>
+  <script src="routes.js"></script>
+</body>
+</html>
